@@ -14,7 +14,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const whatsappNumber = "8801612898695";
 const emailAddress = "hasanoffichal007@gmail.com";
@@ -182,25 +182,35 @@ ${formData.message}`
               </p>
 
               <div className="mt-5 flex gap-3">
-                <a
-                  href="https://github.com/"
+                <Link
+                  href="https://github.com/sheikhmhummadhasanhttps://github.com/sheikhmhummadhasan"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub"
                   className="flex h-11 w-11 items-center justify-center border border-[#D6D3CD] transition-colors hover:bg-[#1A1A1A] hover:text-white"
                 >
                   <FaGithub size={19} />
-                </a>
+                </Link>
 
-                <a
-                  href="https://linkedin.com/"
+                <Link
+                  href="https://www.linkedin.com/in/hasan-sheikh-7604542b2/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
                   className="flex h-11 w-11 items-center justify-center border border-[#D6D3CD] transition-colors hover:bg-[#1A1A1A] hover:text-white"
                 >
                   <FaLinkedin size={19} />
-                </a>
+                </Link>
+
+                <Link
+                  href="https://www.facebook.com/sheikhmhummad.hasan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="flex h-11 w-11 items-center justify-center border border-[#D6D3CD] transition-colors hover:bg-[#1A1A1A] hover:text-white"
+                >
+                  <FaFacebook size={19} />
+                </Link>
               </div>
             </div>
           </aside>
