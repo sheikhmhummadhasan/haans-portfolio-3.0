@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { Mail, ArrowUpRight } from "lucide-react";
+import toast from "react-hot-toast";
 
 const EMAIL = "your-email@example.com";
 
@@ -15,23 +16,26 @@ const services = [
 const Contact = () => {
   const [plan, setPlan] = useState("Basic");
 
-  const submit = (e) => {
+const submit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
 
-    const formData = new FormData(e.currentTarget);
-
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const budget = formData.get("budget");
-    const message = formData.get("message");
-
-    const subject = encodeURIComponent(`Project inquiry from ${name}`);
-
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nService: ${plan}\nBudget: ${budget}\n\nProject Details:\n${message}`
-    );
-
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+    const prom = await fetch(`http://localhost:5000/order`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const res = await prom.json();
+    if(res){
+      toast.success('Your Order Successfully Placed!')
+    }
+    if(!res){
+      toast.error('Somthing went to wrong!')
+    }
+    console.log(data, res);
   };
 
   return (

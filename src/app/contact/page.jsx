@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -15,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const whatsappNumber = "8801612898695";
 const emailAddress = "hasanoffichal007@gmail.com";
@@ -32,6 +32,7 @@ const services = [
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
+    number: "",
     email: "",
     service: "",
     budget: "",
@@ -49,26 +50,25 @@ const ContactPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
 
-    const subject = encodeURIComponent(
-      `Project Inquiry from ${formData.name}`
-    );
-
-    const body = encodeURIComponent(
-      `Name: ${formData.name}
-Email: ${formData.email}
-Service: ${formData.service}
-Budget: ${formData.budget}
-
-Project Details:
-${formData.message}`
-    );
-
-    setSubmitted(true);
-
-    window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+    const prom = await fetch(`http://localhost:5000/visitor`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const res = await prom.json();
+    if(res){
+      toast.success(`Your Message sent is Successfully!`)
+    }else{
+      toast.error('sorry surver is error!')
+    }
+    console.log(data, res);
   };
 
   const inputClass =
@@ -83,14 +83,13 @@ ${formData.message}`
           </p>
 
           <h1 className="font-display text-5xl font-semibold leading-[1.1] tracking-tight sm:text-7xl">
-            Lets start a
-            <span className="text-[#88847D]"> conversation.</span>
+            Lets start a<span className="text-[#88847D]"> conversation.</span>
           </h1>
 
           <p className="mt-7 max-w-2xl text-base leading-8 text-[#737373]">
             Have an idea, a project, or just want to say hello? I do love to
-            hear from you. Lets discuss how we can create something
-            meaningful together.
+            hear from you. Lets discuss how we can create something meaningful
+            together.
           </p>
         </div>
 
@@ -124,9 +123,7 @@ ${formData.message}`
                   <p className="text-xs uppercase tracking-widest text-[#737373]">
                     Email me
                   </p>
-                  <p className="mt-1 text-sm font-medium">
-                    {emailAddress}
-                  </p>
+                  <p className="mt-1 text-sm font-medium">{emailAddress}</p>
                 </div>
 
                 <ArrowUpRight
@@ -149,9 +146,7 @@ ${formData.message}`
                   <p className="text-xs uppercase tracking-widest text-[#737373]">
                     WhatsApp
                   </p>
-                  <p className="mt-1 text-sm font-medium">
-                    +880 1612-898695
-                  </p>
+                  <p className="mt-1 text-sm font-medium">+880 1612-898695</p>
                 </div>
 
                 <ArrowUpRight
@@ -169,9 +164,7 @@ ${formData.message}`
                   <p className="text-xs uppercase tracking-widest text-[#737373]">
                     Location
                   </p>
-                  <p className="mt-1 text-sm font-medium">
-                    Bangladesh
-                  </p>
+                  <p className="mt-1 text-sm font-medium">Bangladesh</p>
                 </div>
               </div>
             </div>
@@ -248,6 +241,25 @@ ${formData.message}`
                   />
                 </div>
 
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="text-xs uppercase tracking-widest text-[#737373]"
+                  >
+                    YOUR PHONE NUMBER *
+                  </label>
+
+                  <input
+                    id="email"
+                    name="number"
+                    type="number"
+                    required
+                    value={formData.number}
+                    onChange={handleChange}
+                    placeholder="+XXXXXXXXXXXX"
+                    className={inputClass}
+                  />
+                </div>
                 <div>
                   <label
                     htmlFor="email"
@@ -382,7 +394,7 @@ ${formData.message}`
 
             <a
               href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                "Hello Hasan, I would like to discuss a project with you."
+                "Hello Hasan, I would like to discuss a project with you.",
               )}`}
               target="_blank"
               rel="noopener noreferrer"
