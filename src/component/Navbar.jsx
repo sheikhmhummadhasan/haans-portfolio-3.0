@@ -1,8 +1,9 @@
+
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
+import { useRef, useSyncExternalStore } from "react";
 
 const links = [
   { name: "About", path: "/about" },
@@ -13,9 +14,19 @@ const links = [
   { name: "Contact", path: "/contact" },
 ];
 
+const subscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 const Navbar = () => {
   const pathname = usePathname();
   const drawer = useRef(null);
+
+  const mounted = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  );
 
   const closeMenu = () => drawer.current?.close();
 
@@ -34,21 +45,25 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden items-center gap-6 text-sm md:flex">
-            {links.map((link, index) => (
-              <Link
-                key={link.path}
-                href={link.path}
-                aria-current={pathname === link.path ? "page" : undefined}
-                style={{ animationDelay: `${0.2 + index * 0.1}s` }}
-                className={`enter-top capitalize transition hover:opacity-100 ${
-                  pathname === link.path
-                    ? "font-semibold opacity-100"
-                    : "opacity-70"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {links.map((link, index) => {
+              const isActive = mounted && pathname === link.path;
+
+              return (
+                <Link
+                  key={link.path}
+                  href={link.path}
+                  aria-current={isActive ? "page" : undefined}
+                  style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+                  className={`enter-top capitalize transition hover:opacity-100 ${
+                    isActive
+                      ? "font-semibold opacity-100"
+                      : "opacity-70"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="enter-right flex items-center gap-3">
@@ -122,21 +137,26 @@ const Navbar = () => {
           </div>
 
           <nav className="mt-10 space-y-2">
-            {links.map((link, index) => (
-              <Link
-                key={link.path}
-                href={link.path}
-                onClick={closeMenu}
-                style={{ animationDelay: `${0.1 + index * 0.06}s` }}
-                className={`drawer-link block rounded-md px-3 py-3 text-lg ${
-                  pathname === link.path
-                    ? "bg-primary text-primary-foreground"
-                    : "hover:bg-black/5"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {links.map((link, index) => {
+              const isActive = mounted && pathname === link.path;
+
+              return (
+                <Link
+                  key={link.path}
+                  href={link.path}
+                  onClick={closeMenu}
+                  aria-current={isActive ? "page" : undefined}
+                  style={{ animationDelay: `${0.1 + index * 0.06}s` }}
+                  className={`drawer-link block rounded-md px-3 py-3 text-lg ${
+                    isActive
+                      ? "bg-primary text-primary-foreground"
+                      : "hover:bg-black/5"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </nav>
 
           <Link

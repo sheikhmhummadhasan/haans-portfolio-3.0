@@ -13,7 +13,7 @@ const ReviewForm = () => {
     const data = Object.fromEntries(formData.entries());
     data.rating = rating;
 
-    const prom = await fetch(`http://localhost:5000/review`,{
+    const prom = await fetch(`${process.env.SURVER_URI}/review`,{
       method:"POST",
       headers:{
         'content-type': 'application/json'
@@ -26,7 +26,7 @@ const ReviewForm = () => {
     }else{
       toast.success(`Thsnks for your review ${data.name}!`)
     }
-    console.log(data, res)
+
   };
 
   return (

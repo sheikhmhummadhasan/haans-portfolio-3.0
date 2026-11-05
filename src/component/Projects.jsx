@@ -2,6 +2,7 @@
 
 import { ArrowUpRight } from "lucide-react";
 import SectionTitle from "./SectionTitle";
+import Link from "next/link";
 
 const projects = [
   { n: "01", t: "StudyNook", k: "Full Stack Development", y: "2026" },
@@ -26,8 +27,8 @@ const Projects = () => {
             key={project.n}
             className="reveal group border-t border-neutral-300 last:border-b"
           >
-            <a
-              href="#contact"
+            <Link
+              href="/projects"
               className="flex items-center gap-4 py-8 transition-all duration-500 group-hover:bg-neutral-950 group-hover:px-6 group-hover:text-white md:gap-6"
             >
               <span className="text-sm opacity-60">{project.n}</span>
@@ -41,7 +42,7 @@ const Projects = () => {
               </span>
 
               <ArrowUpRight className="h-7 w-7 shrink-0 transition-transform duration-500 group-hover:rotate-45" />
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

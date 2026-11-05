@@ -1,14 +1,19 @@
-
+export const instant = false
 import ReviewComp from '@/component/ReviewComp';
 import React, { Suspense } from 'react';
 
 const ReviewPage = async () => {
-  'use cache'
-  const prom = await fetch(`http://localhost:5000/review`);
+  // 'use cache'
+  const prom = await fetch(`${process.env.SURVER_URI}/review`,{
+    cache: "no-store",
+  });
   const res = await prom.json()
+
   return (
     <div>
-      <ReviewComp activeReviews={res}/>
+      <Suspense fallback={`loading...`}>
+        <ReviewComp activeReviews={res}/>
+      </Suspense>
     </div>
   );
 };

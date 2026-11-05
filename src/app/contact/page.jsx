@@ -55,7 +55,7 @@ const ContactPage = () => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    const prom = await fetch(`http://localhost:5000/visitor`, {
+    const prom = await fetch(`${process.env.SURVER_URI}/visitor`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -68,7 +68,7 @@ const ContactPage = () => {
     }else{
       toast.error('sorry surver is error!')
     }
-    console.log(data, res);
+
   };
 
   const inputClass =

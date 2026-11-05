@@ -21,7 +21,7 @@ const submit = async (e) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    const prom = await fetch(`http://localhost:5000/order`, {
+    const prom = await fetch(`${process.env.SURVER_URI}/order`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -35,7 +35,7 @@ const submit = async (e) => {
     if(!res){
       toast.error('Somthing went to wrong!')
     }
-    console.log(data, res);
+
   };
 
   return (
