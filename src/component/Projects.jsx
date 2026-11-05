@@ -10,7 +10,7 @@ const projects = [
   { n: "03", t: "Wanderlust", k: "Travel Website", y: "2025" },
   { n: "04", t: "Portfolio", k: "Web Design & Development", y: "2026" },
 ];
-
+// hello world
 const Projects = () => {
   return (
     <section
