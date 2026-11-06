@@ -13,7 +13,7 @@ const ReviewForm = () => {
     const data = Object.fromEntries(formData.entries());
     data.rating = rating;
 
-    const prom = await fetch(`${process.env.SURVER_URI}/review`,{
+    const prom = await fetch(`${process.env.NEXT_PUBLIC_SURVER_URI}/review`,{
       method:"POST",
       headers:{
         'content-type': 'application/json'

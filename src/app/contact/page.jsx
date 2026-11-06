@@ -54,8 +54,10 @@ const ContactPage = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+    const api = process.env.NEXT_PUBLIC_SURVER_URI
+    console.log(api)
 
-    const prom = await fetch(`${process.env.SURVER_URI}/visitor`, {
+    const prom = await fetch(`${api}/visitor`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

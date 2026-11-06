@@ -21,7 +21,7 @@ const submit = async (e) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    const prom = await fetch(`${process.env.SURVER_URI}/order`, {
+    const prom = await fetch(`${process.env.NEXT_PUBLIC_SURVER_URI}/order`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

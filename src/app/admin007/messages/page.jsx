@@ -6,7 +6,7 @@ import ReviewDeleteButton from "../component/ReviewDeleteButton";
 const MessagesPage = async () => {
   const getData = async (endpoint) => {
     try {
-      const res = await fetch(`${process.env.SURVER_URI}/${endpoint}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SURVER_URI}/${endpoint}`, {
         cache: "no-store",
       });
 

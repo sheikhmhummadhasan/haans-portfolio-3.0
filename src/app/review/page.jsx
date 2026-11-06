@@ -4,7 +4,7 @@ import React, { Suspense } from 'react';
 
 const ReviewPage = async () => {
   // 'use cache'
-  const prom = await fetch(`${process.env.SURVER_URI}/review`,{
+  const prom = await fetch(`${process.env.NEXT_PUBLIC_SURVER_URI}/review`,{
     cache: "no-store",
   });
   const res = await prom.json()

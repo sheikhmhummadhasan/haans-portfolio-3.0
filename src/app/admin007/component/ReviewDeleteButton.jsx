@@ -10,7 +10,7 @@ const ReviewDeleteButton = ({ id }) => {
   
 const handleDelete = async () => {
   try {
-    const prom = await fetch(`${process.env.SURVER_URI}/review/${id}`, {
+    const prom = await fetch(`${process.env.NEXT_PUBLIC_SURVER_URI}/review/${id}`, {
       method: "DELETE",
       cache: "no-store",
     });
