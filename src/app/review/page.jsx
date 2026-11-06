@@ -3,7 +3,7 @@ import ReviewComp from '@/component/ReviewComp';
 import React, { Suspense } from 'react';
 
 const ReviewPage = async () => {
-  // 'use cache'
+
   const prom = await fetch(`${process.env.NEXT_PUBLIC_SURVER_URI}/review`,{
     cache: "no-store",
   });

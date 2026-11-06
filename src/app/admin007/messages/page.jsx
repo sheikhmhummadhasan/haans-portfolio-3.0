@@ -2,6 +2,7 @@ export const instant = false;
 
 import React from "react";
 import ReviewDeleteButton from "../component/ReviewDeleteButton";
+import DeleteMessage from "../component/DeleteMessage";
 
 const MessagesPage = async () => {
   const getData = async (endpoint) => {
@@ -88,6 +89,9 @@ const MessagesPage = async () => {
                     {item.message || "No message"}
                   </p>
                 </div>
+                 <div className="flex items-center justify-end mt-2">
+                  <DeleteMessage id={item._id} />
+                </div>
               </div>
             ))
           ) : (
@@ -148,7 +152,7 @@ const MessagesPage = async () => {
                   </p>
                 )}
 
-                <div className="flex items-center justify-end">
+                <div className="flex items-center justify-end mt-2">
                   <ReviewDeleteButton id={review._id} />
                 </div>
               </div>

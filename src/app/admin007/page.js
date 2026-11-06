@@ -4,7 +4,7 @@ import ClonePage from "./component/ClonePage";
 
 const page = async () => {
 
-  const prom = await fetch(`${process.env.SURVER_URI}/visitor`);
+  const prom = await fetch(`${process.env.NEXT_PUBLIC_SURVER_URI}/visitor/`);
   const res = await prom.json();
 
   return (

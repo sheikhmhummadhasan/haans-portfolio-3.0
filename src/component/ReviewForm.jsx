@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { Star, Send } from "lucide-react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const ReviewForm = () => {
   const [rating, setRating] = useState(5);
+  const router = useRouter();
 
    const handleSubmit = async(e) => {
     e.preventDefault();
+    
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     data.rating = rating;
@@ -26,7 +29,7 @@ const ReviewForm = () => {
     }else{
       toast.success(`Thsnks for your review ${data.name}!`)
     }
-
+    router.refresh()
   };
 
   return (
