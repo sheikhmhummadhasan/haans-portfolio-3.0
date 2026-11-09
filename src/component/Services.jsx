@@ -55,10 +55,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section
-      id="services"
-      className="w-full px-6 py-32 md:px-12 lg:px-16"
-    >
+    <section id="services" className="w-full px-6 py-32 md:px-12 lg:px-16">
       <div className="mb-16">
         <SectionTitle k="Order a project" t="Services & pricing" />
       </div>
@@ -82,9 +79,7 @@ const Services = () => {
 
             <h3 className="text-2xl font-bold">{service.name}</h3>
 
-            <p className="mt-2 text-sm opacity-70">
-              {service.description}
-            </p>
+            <p className="mt-2 text-sm opacity-70">{service.description}</p>
 
             <div className="my-8 font-display text-5xl font-bold">
               ${service.price}
@@ -92,17 +87,32 @@ const Services = () => {
 
             <ul className="mb-10 flex-1 space-y-4">
               {service.features.map((feature) => (
-                <li
-                  key={feature}
-                  className="flex items-center gap-3 text-sm"
-                >
+                <li key={feature} className="flex items-center gap-3 text-sm">
                   <Check className="h-4 w-4 shrink-0" />
                   {feature}
                 </li>
               ))}
             </ul>
 
-            <a
+            <form
+              className={`group flex items-center justify-center gap-2 rounded-full py-4 text-sm font-medium transition hover:scale-[1.03] ${
+                service.popular
+                  ? "bg-white text-neutral-950"
+                  : "bg-neutral-950 text-white"
+              }`}
+              action="/api/checkout_sessions"
+              method="POST"
+            >
+              <button type="submit" role="link">
+                Choose {service.name}
+                <ArrowUpRight
+                  size={17}
+                  className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                />
+              </button>
+            </form>
+
+            {/* <a
               href={`/contact?plan=${service._id}`}
               className={`group flex items-center justify-center gap-2 rounded-full py-4 text-sm font-medium transition hover:scale-[1.03] ${
                 service.popular
@@ -115,7 +125,7 @@ const Services = () => {
                 size={17}
                 className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
               />
-            </a>
+            </a> */}
           </div>
         ))}
       </div>
