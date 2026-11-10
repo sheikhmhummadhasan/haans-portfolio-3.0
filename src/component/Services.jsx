@@ -95,15 +95,20 @@ const Services = () => {
             </ul>
 
             <form
-              className={`group flex items-center justify-center gap-2 rounded-full py-4 text-sm font-medium transition hover:scale-[1.03] ${
-                service.popular
-                  ? "bg-white text-neutral-950"
-                  : "bg-neutral-950 text-white"
-              }`}
               action="/api/checkout_sessions"
               method="POST"
+              className="w-full"
             >
-              <button type="submit" role="link">
+              <input type="hidden" name="plan_id" value={service._id} />
+
+              <button
+                type="submit"
+                className={`group flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm font-medium transition hover:scale-[1.03] ${
+                  service.popular
+                    ? "bg-white text-neutral-950"
+                    : "bg-neutral-950 text-white"
+                }`}
+              >
                 Choose {service.name}
                 <ArrowUpRight
                   size={17}
@@ -111,7 +116,6 @@ const Services = () => {
                 />
               </button>
             </form>
-
             {/* <a
               href={`/contact?plan=${service._id}`}
               className={`group flex items-center justify-center gap-2 rounded-full py-4 text-sm font-medium transition hover:scale-[1.03] ${
@@ -134,3 +138,5 @@ const Services = () => {
 };
 
 export default Services;
+
+
